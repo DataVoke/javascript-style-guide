@@ -1,5 +1,5 @@
 {
-  "name": "airbnb-style",
+  "name": "caitech-javascript-style",
   "version": "2.0.0",
   "description": "A mostly reasonable approach to JavaScript.",
   "scripts": {
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/airbnb/javascript.git"
+    "url": "https://github.com/DataVoke/javascript-style-guide.git"
   },
   "keywords": [
     "style guide",
@@ -34,11 +34,14 @@
     "jsx"
   ],
   "author": "Harrison Shoff <hi@hshoff.com> (https://twitter.com/hshoff)",
+  "maintainers": [
+    "Aaron Mercier <aaron.mercier@cagents.com>"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/airbnb/javascript/issues"
+    "url": "https://github.com/DataVoke/javascript-style-guide/issues"
   },
-  "homepage": "https://github.com/airbnb/javascript",
+  "homepage": "https://github.com/DataVoke/javascript-style-guide",
   "devDependencies": {
     "markdownlint": "^0.20.4",
     "markdownlint-cli": "^0.23.2"

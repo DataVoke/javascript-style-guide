@@ -1,4 +1,4 @@
-# Airbnb CSS-in-JavaScript Style Guide
+# CAI Tech CSS-in-JavaScript Style Guide
 
 *A mostly reasonable approach to CSS-in-JavaScript*
 
