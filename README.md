@@ -272,12 +272,14 @@ Other Style Guides
     ```
 
   <a name="objects--prototype-builtins"></a>
-  - [3.7](#objects--prototype-builtins) Do not call `Object.prototype` methods directly, such as `hasOwnProperty`, `propertyIsEnumerable`, and `isPrototypeOf`. eslint: [`no-prototype-builtins`](https://eslint.org/docs/rules/no-prototype-builtins)
+  - [3.7](#objects--prototype-builtins) It is ok to call `Object.prototype` methods directly, such as `hasOwnProperty`, `propertyIsEnumerable`, and `isPrototypeOf`. eslint: [`no-prototype-builtins`](https://eslint.org/docs/rules/no-prototype-builtins)
 
-    > Why? These methods may be shadowed by properties on the object in question - consider `{ hasOwnProperty: false }` - or, the object may be a null object (`Object.create(null)`).
+    > This was modified from the original code style guide
+
+    > However, be aware that these methods may be shadowed by properties on the object in question - consider `{ hasOwnProperty: false }` - or, the object may be a null object (`Object.create(null)`).
 
     ```javascript
-    // bad
+    // acceptable
     console.log(object.hasOwnProperty(key));
 
     // good
@@ -1279,12 +1281,14 @@ Other Style Guides
 ## Modules
 
   <a name="modules--use-them"></a><a name="10.1"></a>
-  - [10.1](#modules--use-them) Always use modules (`import`/`export`) over a non-standard module system. You can always transpile to your preferred module system.
+  - [10.1](#modules--use-them) Prefer to use modules (`import`/`export`) over a non-standard module system when possible. You can always transpile to your preferred module system.
+
+    > This was modified from the original code style guide
 
     > Why? Modules are the future, let’s start using the future now.
 
     ```javascript
-    // bad
+    // acceptable
     const AirbnbStyleGuide = require('./AirbnbStyleGuide');
     module.exports = AirbnbStyleGuide.es6;
 
@@ -1298,29 +1302,29 @@ Other Style Guides
     ```
 
   <a name="modules--no-wildcard"></a><a name="10.2"></a>
-  - [10.2](#modules--no-wildcard) Do not use wildcard imports.
+  - [10.2](#modules--no-wildcard) wildcard imports are allowed.
 
-    > Why? This makes sure you have a single default export.
+    > This was modified from the original code style guide
 
     ```javascript
-    // bad
+    // acceptable
     import * as AirbnbStyleGuide from './AirbnbStyleGuide';
 
-    // good
+    // acceptable
     import AirbnbStyleGuide from './AirbnbStyleGuide';
     ```
 
   <a name="modules--no-export-from-import"></a><a name="10.3"></a>
-  - [10.3](#modules--no-export-from-import) And do not export directly from an import.
+  - [10.3](#modules--no-export-from-import) Exports directly from an import are allowed.
 
-    > Why? Although the one-liner is concise, having one clear way to import and one clear way to export makes things consistent.
+    > This was modified from the original code style guide
 
     ```javascript
-    // bad
+    // acceptable
     // filename es6.js
     export { es6 as default } from './AirbnbStyleGuide';
 
-    // good
+    // acceptable
     // filename es6.js
     import { es6 } from './AirbnbStyleGuide';
     export default es6;
@@ -1395,16 +1399,18 @@ Other Style Guides
     ```
 
   <a name="modules--multiline-imports-over-newlines"></a>
-  - [10.8](#modules--multiline-imports-over-newlines) Multiline imports should be indented just like multiline array and object literals.
+  - [10.8](#modules--multiline-imports-over-newlines) Multiline imports should be indented just like multiline array and object literals. However there is no restriction on imports always being multiline, unless it breaks the max character length rule.
  eslint: [`object-curly-newline`](https://eslint.org/docs/rules/object-curly-newline)
+
+    > This was modified from the original code style guide
 
     > Why? The curly braces follow the same indentation rules as every other curly brace block in the style guide, as do the trailing commas.
 
     ```javascript
-    // bad
+    // acceptable
     import {longNameA, longNameB, longNameC, longNameD, longNameE} from 'path';
 
-    // good
+    // acceptable
     import {
       longNameA,
       longNameB,
@@ -1415,12 +1421,14 @@ Other Style Guides
     ```
 
   <a name="modules--no-webpack-loader-syntax"></a>
-  - [10.9](#modules--no-webpack-loader-syntax) Disallow Webpack loader syntax in module import statements.
+  - [10.9](#modules--no-webpack-loader-syntax) Webpack loader syntax in module import statements is allowed but should be avoided unless necessary.
  eslint: [`import/no-webpack-loader-syntax`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-webpack-loader-syntax.md)
-    > Why? Since using Webpack syntax in the imports couples the code to a module bundler. Prefer using the loader syntax in `webpack.config.js`.
+    > This was modified from the original code style guide  
+
+    >Why? Since using Webpack syntax in the imports couples the code to a module bundler. Prefer using the loader syntax in webpack.config.js.
 
     ```javascript
-    // bad
+    // acceptable
     import fooSass from 'css!sass!foo.scss';
     import barCss from 'style!css!bar.css';
 
@@ -1451,23 +1459,23 @@ Other Style Guides
 ## Iterators and Generators
 
   <a name="iterators--nope"></a><a name="11.1"></a>
-  - [11.1](#iterators--nope) Don’t use iterators. Prefer JavaScript’s higher-order functions instead of loops like `for-in` or `for-of`. eslint: [`no-iterator`](https://eslint.org/docs/rules/no-iterator.html) [`no-restricted-syntax`](https://eslint.org/docs/rules/no-restricted-syntax)
+  - [11.1](#iterators--nope) Usage of iterators are acceptable. Prefer JavaScript’s higher-order functions such as find/filter/map/some when possible. eslint: [`no-iterator`](https://eslint.org/docs/rules/no-iterator.html) [`no-restricted-syntax`](https://eslint.org/docs/rules/no-restricted-syntax)
 
-    > Why? This enforces our immutable rule. Dealing with pure functions that return values is easier to reason about than side effects.
+    > This was modified from the original code style guide
 
     > Use `map()` / `every()` / `filter()` / `find()` / `findIndex()` / `reduce()` / `some()` / ... to iterate over arrays, and `Object.keys()` / `Object.values()` / `Object.entries()` to produce arrays so you can iterate over objects.
 
     ```javascript
     const numbers = [1, 2, 3, 4, 5];
 
-    // bad
+    // acceptable
     let sum = 0;
     for (let num of numbers) {
       sum += num;
     }
     sum === 15;
 
-    // good
+    // acceptable
     let sum = 0;
     numbers.forEach((num) => {
       sum += num;
@@ -1478,13 +1486,13 @@ Other Style Guides
     const sum = numbers.reduce((total, num) => total + num, 0);
     sum === 15;
 
-    // bad
+    // acceptable
     const increasedByOne = [];
     for (let i = 0; i < numbers.length; i++) {
       increasedByOne.push(numbers[i] + 1);
     }
 
-    // good
+    // acceptable
     const increasedByOne = [];
     numbers.forEach((num) => {
       increasedByOne.push(num + 1);
@@ -1597,13 +1605,15 @@ Other Style Guides
     ```
 
   <a name="es2016-properties--exponentiation-operator"></a>
-  - [12.3](#es2016-properties--exponentiation-operator) Use exponentiation operator `**` when calculating exponentiations. eslint: [`no-restricted-properties`](https://eslint.org/docs/rules/no-restricted-properties).
+  - [12.3](#es2016-properties--exponentiation-operator) Use exponentiation operator `**` or `Math.pow` when calculating exponentiations. eslint: [`no-restricted-properties`](https://eslint.org/docs/rules/no-restricted-properties).
+
+      > This was modified from the original code style guide
 
     ```javascript
-    // bad
+    // acceptable
     const binary = Math.pow(2, 10);
 
-    // good
+    // acceptable
     const binary = 2 ** 10;
     ```
 
@@ -1744,13 +1754,12 @@ Other Style Guides
     ```
 
   <a name="variables--unary-increment-decrement"></a><a name="13.6"></a>
-  - [13.6](#variables--unary-increment-decrement) Avoid using unary increments and decrements (`++`, `--`). eslint [`no-plusplus`](https://eslint.org/docs/rules/no-plusplus)
+  - [13.6](#variables--unary-increment-decrement) Using unary increments and decrements (`++`, `--`) is acceptable. eslint [`no-plusplus`](https://eslint.org/docs/rules/no-plusplus)
 
-    > Why? Per the eslint documentation, unary increment and decrement statements are subject to automatic semicolon insertion and can cause silent errors with incrementing or decrementing values within an application. It is also more expressive to mutate your values with statements like `num += 1` instead of `num++` or `num ++`. Disallowing unary increment and decrement statements also prevents you from pre-incrementing/pre-decrementing values unintentionally which can also cause unexpected behavior in your programs.
+    > This was modified from the original code style guide
 
     ```javascript
-    // bad
-
+    // acceptable
     const array = [1, 2, 3];
     let num = 1;
     num++;
@@ -1766,8 +1775,7 @@ Other Style Guides
       }
     }
 
-    // good
-
+    // acceptable
     const array = [1, 2, 3];
     let num = 1;
     num += 1;
@@ -1944,7 +1952,9 @@ Other Style Guides
 ## Comparison Operators & Equality
 
   <a name="comparison--eqeqeq"></a><a name="15.1"></a>
-  - [15.1](#comparison--eqeqeq) Use `===` and `!==` over `==` and `!=`. eslint: [`eqeqeq`](https://eslint.org/docs/rules/eqeqeq.html)
+  - [15.1](#comparison--eqeqeq) Use `===` and `!==` over `==` and `!=` unless comparing null, two literals, or the result of typeof (per eslint's eqeqeq "smart" mode). eslint: [`eqeqeq`](https://eslint.org/docs/rules/eqeqeq.html)
+
+      > This was modified from the original code style guide
 
   <a name="comparison--if"></a><a name="15.2"></a>
   - [15.2](#comparison--if) Conditional statements such as the `if` statement evaluate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
@@ -2314,7 +2324,7 @@ Other Style Guides
 ## Comments
 
   <a name="comments--multiline"></a><a name="17.1"></a>
-  - [18.1](#comments--multiline) Use `/** ... */` for multiline comments.
+  - [18.1](#comments--multiline) Use `/** ... */` for multiline comments. 
 
     ```javascript
     // bad
@@ -2450,15 +2460,36 @@ Other Style Guides
     }
     ```
 
+  <a name="comments--jsdoc"></a><a name="17.6"></a>
+  - [18.7](#comments--jsdoc) Use properly defined JSDoc syntax on all class methods and exported util methods.
+
+    > This was modified from the original code style guide
+
+    ```javascript
+    class Calculator extends Abacus {
+
+        /**
+         * Doubles the specified value
+         * @param {Number} value - The value to double
+         * @returns {Number} The doubled value
+         */
+        double(value) {
+          return value * 2;
+        }
+    }
+    ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Whitespace
 
   <a name="whitespace--spaces"></a><a name="18.1"></a>
-  - [19.1](#whitespace--spaces) Use soft tabs (space character) set to 2 spaces. eslint: [`indent`](https://eslint.org/docs/rules/indent.html)
+  - [19.1](#whitespace--spaces) Use soft tabs (space character) set to 4 spaces. eslint: [`indent`](https://eslint.org/docs/rules/indent.html)
+
+    > This was modified from the original code style guide
 
     ```javascript
-    // bad
+    // good
     function foo() {
     ∙∙∙∙let name;
     }
@@ -2468,7 +2499,7 @@ Other Style Guides
     ∙let name;
     }
 
-    // good
+    // bad
     function baz() {
     ∙∙let name;
     }
@@ -2813,7 +2844,9 @@ Other Style Guides
     ```
 
   <a name="whitespace--max-len"></a><a name="18.12"></a>
-  - [19.13](#whitespace--max-len) Avoid having lines of code that are longer than 100 characters (including whitespace). Note: per [above](#strings--line-length), long strings are exempt from this rule, and should not be broken up. eslint: [`max-len`](https://eslint.org/docs/rules/max-len.html)
+  - [19.13](#whitespace--max-len) Avoid having lines of code that are longer than 150 characters (including whitespace). Note: per [above](#strings--line-length), long strings are exempt from this rule, and should not be broken up. eslint: [`max-len`](https://eslint.org/docs/rules/max-len.html)
+
+    > This was modified from the original code style guide
 
     > Why? This ensures readability and maintainability.
 
@@ -2915,13 +2948,19 @@ Other Style Guides
   - [19.19](#whitespace--no-trailing-spaces) Avoid trailing spaces at the end of lines. eslint: [`no-trailing-spaces`](https://eslint.org/docs/rules/no-trailing-spaces)
 
   <a name="whitespace--no-multiple-empty-lines"></a>
-  - [19.20](#whitespace--no-multiple-empty-lines) Avoid multiple empty lines, only allow one newline at the end of files, and avoid a newline at the beginning of files. eslint: [`no-multiple-empty-lines`](https://eslint.org/docs/rules/no-multiple-empty-lines)
+  - [19.20](#whitespace--no-multiple-empty-lines) Avoid more than 4 multiple empty lines, only allow one newline at the end of files, and avoid a newline at the beginning of files. eslint: [`no-multiple-empty-lines`](https://eslint.org/docs/rules/no-multiple-empty-lines)
+
+    > This was modified from the original code style guide
 
     <!-- markdownlint-disable MD012 -->
     ```javascript
-    // bad - multiple empty lines
+    // bad - 6 multiple empty lines
     var x = 1;
 
+
+
+
+ 
 
     var y = 2;
 
@@ -3277,17 +3316,19 @@ Other Style Guides
     ```
 
   <a name="naming--leading-underscore"></a><a name="22.4"></a>
-  - [23.4](#naming--leading-underscore) Do not use trailing or leading underscores. eslint: [`no-underscore-dangle`](https://eslint.org/docs/rules/no-underscore-dangle.html)
+  - [23.4](#naming--leading-underscore) Trailing or leading underscores are allowed. eslint: [`no-underscore-dangle`](https://eslint.org/docs/rules/no-underscore-dangle.html)
 
-    > Why? JavaScript does not have the concept of privacy in terms of properties or methods. Although a leading underscore is a common convention to mean “private”, in fact, these properties are fully public, and as such, are part of your public API contract. This convention might lead developers to wrongly think that a change won’t count as breaking, or that tests aren’t needed. tl;dr: if you want something to be “private”, it must not be observably present.
+    > This was modified from the original code style guide
+
+    > A leading underscore is a common convention to mean “private”, but understand that JavaScript does not handle these any differently than methods without underscores. This should only be used for code readability, not for specific functionality.
 
     ```javascript
-    // bad
+    // acceptable
     this.__firstName__ = 'Panda';
     this.firstName_ = 'Panda';
     this._firstName = 'Panda';
 
-    // good
+    // acceptable
     this.firstName = 'Panda';
 
     // good, in environments where WeakMaps are available
@@ -3732,5 +3773,20 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **[⬆ back to top](#table-of-contents)**
 
 ## Amendments
+* 3.7 - Changed to ignore
+* 10.1 - Changed to ignore
+* 10.2 - Changed to ignore
+* 10.3 - Changed to ignore
+* 10.8 - Changed to ignore, will rely on maxLen instead
+* 10.9 - Changed to ignore
+* 11.1 - Changed to ignore
+* 12.3 - Changed to ignore
+* 13.6 - Changed to ignore
+* 15.1 - Updated to allow for undefined/null comparisons
+* 18.7 - Added new rule to specify that all class methods and exported util functions should have jsdocs
+* 19.1 - Updated to 4-space soft tabs
+* 19.13 - Updated to allow 150 instead of 100
+* 19.20 - Changed to allow UP TO 4 blank lines in a row
+* 23.4 - Changed to ignore
 
 We encourage you to fork this guide and change the rules to fit your team’s style guide. Below, you may list some amendments to the style guide. This allows you to periodically update your style guide without having to deal with merge conflicts.

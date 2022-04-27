@@ -7,3 +7,7 @@ yarn.lock
 package-lock.json
 
 .idea/
+
+.DS_Store
+
+.vscode/
