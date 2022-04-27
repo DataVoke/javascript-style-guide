@@ -1,6 +1,4 @@
-// Use this file as a starting point for your project's .eslintrc.
-// Copy this file, and add rule overrides as needed.
-{
+module.exports = {
     "extends": "airbnb",
     "rules": {
         "no-prototype-builtins": "off",
@@ -24,7 +22,7 @@
             {
                 "selector": "WithStatement",
                 "message": "`with` is disallowed in strict mode because it makes code impossible to predict and optimize.",
-            },
+            }
         ],
         "object-curly-newline": [
             "error",
@@ -99,4 +97,4 @@
             }
         ]
     }
-}
+};

@@ -1,22 +1,9 @@
 {
-  "name": "caitech-javascript-style",
-  "version": "2.0.0",
-  "description": "A mostly reasonable approach to JavaScript.",
-  "scripts": {
-    "preinstall": "npm run install:config && npm run install:config:base",
-    "postinstall": "rm -rf node_modules/markdownlint-cli/node_modules/markdownlint",
-    "install:config": "cd packages/eslint-config-airbnb && npm prune && npm install",
-    "install:config:base": "cd packages/eslint-config-airbnb-base && npm prune && npm install",
-    "lint": "markdownlint --config linters/.markdownlint.json README.md */README.md",
-    "pretest": "npm run --silent lint",
-    "test": "npm run --silent test:config && npm run --silent test:config:base",
-    "test:config": "cd packages/eslint-config-airbnb; npm test",
-    "test:config:base": "cd packages/eslint-config-airbnb-base; npm test",
-    "pretravis": "npm run --silent lint",
-    "travis": "npm run --silent travis:config && npm run --silent travis:config:base",
-    "travis:config": "cd packages/eslint-config-airbnb; npm run travis",
-    "travis:config:base": "cd packages/eslint-config-airbnb-base; npm run travis"
-  },
+  "name": "eslint-config-caitech",
+  "version": "1.0.0",
+  "description": "A mostly reasonable approach to JavaScript amended for the CAI tech team.",
+  "main": "eslint.js",
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/DataVoke/javascript-style-guide.git"
@@ -31,7 +18,9 @@
     "es2017",
     "es2018",
     "react",
-    "jsx"
+    "jsx",
+    "eslint",
+    "eslintconfig"
   ],
   "author": "Harrison Shoff <hi@hshoff.com> (https://twitter.com/hshoff)",
   "maintainers": [
@@ -45,5 +34,14 @@
   "devDependencies": {
     "markdownlint": "^0.20.4",
     "markdownlint-cli": "^0.23.2"
+  },
+  "dependencies": {
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.5.0"
+  },
+  "peerDependencies": {
+    "eslint": "^7.32.0 || ^8.2.0"
   }
 }
