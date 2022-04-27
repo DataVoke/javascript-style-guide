@@ -2,6 +2,25 @@
 
 An amended version of the AirBnB Javascript style guide
 
+## <a name="installation-and-usage"></a>Installation and Usage
+
+Prerequisites: [ESlint v8](https://github.com/eslint/eslint)
+
+You can install the config using npm:
+
+```sh
+npm install eslint-config-caitech --save-dev
+```
+
+And then extend the config in your eslintrc configuration
+
+```json
+{
+    "extends": "eslint-config-caitech",
+    "rules": {}
+}
+```
+
 
 Other Style Guides
   - [React](react/)
