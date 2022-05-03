@@ -1,4 +1,4 @@
-# CAI TEch JavaScript Style Guide
+# CAI Tech JavaScript Style Guide
 
 An amended version of the AirBnB Javascript style guide
 
