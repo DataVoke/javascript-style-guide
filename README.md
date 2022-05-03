@@ -9,14 +9,14 @@ Prerequisites: [ESlint v8](https://github.com/eslint/eslint)
 You can install the config using npm:
 
 ```sh
-npm install eslint-config-caitech --save-dev
+npm install @caitech/eslint-config-caitech --save-dev
 ```
 
 And then extend the config in your eslintrc configuration
 
 ```json
 {
-    "extends": "eslint-config-caitech",
+    "extends": "@caitech/eslint-config-caitech",
     "rules": {}
 }
 ```
