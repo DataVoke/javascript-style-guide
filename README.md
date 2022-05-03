@@ -1,22 +1,31 @@
-# Airbnb JavaScript Style Guide() {
+# CAI Tech JavaScript Style Guide
 
-*A mostly reasonable approach to JavaScript*
+An amended version of the AirBnB Javascript style guide
 
-> **Note**: this guide assumes you are using [Babel](https://babeljs.io), and requires that you use [babel-preset-airbnb](https://npmjs.com/babel-preset-airbnb) or the equivalent. It also assumes you are installing shims/polyfills in your app, with [airbnb-browser-shims](https://npmjs.com/airbnb-browser-shims) or the equivalent.
+## <a name="installation-and-usage"></a>Installation and Usage
 
-[![Downloads](https://img.shields.io/npm/dm/eslint-config-airbnb.svg)](https://www.npmjs.com/package/eslint-config-airbnb)
-[![Downloads](https://img.shields.io/npm/dm/eslint-config-airbnb-base.svg)](https://www.npmjs.com/package/eslint-config-airbnb-base)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/airbnb/javascript?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+Prerequisites: [ESlint v8](https://github.com/eslint/eslint)
 
-This guide is available in other languages too. See [Translation](#translation)
+You can install the config using npm:
+
+```sh
+npm install eslint-config-caitech --save-dev
+```
+
+And then extend the config in your eslintrc configuration
+
+```json
+{
+    "extends": "eslint-config-caitech",
+    "rules": {}
+}
+```
+
 
 Other Style Guides
-
-  - [ES5 (Deprecated)](https://github.com/airbnb/javascript/tree/es5-deprecated/es5)
   - [React](react/)
   - [CSS-in-JavaScript](css-in-javascript/)
   - [CSS & Sass](https://github.com/airbnb/css)
-  - [Ruby](https://github.com/airbnb/ruby)
 
 ## Table of Contents
 
@@ -49,14 +58,6 @@ Other Style Guides
   1. [ECMAScript 5 Compatibility](#ecmascript-5-compatibility)
   1. [ECMAScript 6+ (ES 2015+) Styles](#ecmascript-6-es-2015-styles)
   1. [Standard Library](#standard-library)
-  1. [Testing](#testing)
-  1. [Performance](#performance)
-  1. [Resources](#resources)
-  1. [In the Wild](#in-the-wild)
-  1. [Translation](#translation)
-  1. [The JavaScript Style Guide Guide](#the-javascript-style-guide-guide)
-  1. [Chat With Us About JavaScript](#chat-with-us-about-javascript)
-  1. [Contributors](#contributors)
   1. [License](#license)
   1. [Amendments](#amendments)
 
@@ -290,12 +291,14 @@ Other Style Guides
     ```
 
   <a name="objects--prototype-builtins"></a>
-  - [3.7](#objects--prototype-builtins) Do not call `Object.prototype` methods directly, such as `hasOwnProperty`, `propertyIsEnumerable`, and `isPrototypeOf`. eslint: [`no-prototype-builtins`](https://eslint.org/docs/rules/no-prototype-builtins)
+  - [3.7](#objects--prototype-builtins) It is ok to call `Object.prototype` methods directly, such as `hasOwnProperty`, `propertyIsEnumerable`, and `isPrototypeOf`. eslint: [`no-prototype-builtins`](https://eslint.org/docs/rules/no-prototype-builtins)
 
-    > Why? These methods may be shadowed by properties on the object in question - consider `{ hasOwnProperty: false }` - or, the object may be a null object (`Object.create(null)`).
+    > This was modified from the original code style guide
+
+    > However, be aware that these methods may be shadowed by properties on the object in question - consider `{ hasOwnProperty: false }` - or, the object may be a null object (`Object.create(null)`).
 
     ```javascript
-    // bad
+    // acceptable
     console.log(object.hasOwnProperty(key));
 
     // good
@@ -1297,12 +1300,14 @@ Other Style Guides
 ## Modules
 
   <a name="modules--use-them"></a><a name="10.1"></a>
-  - [10.1](#modules--use-them) Always use modules (`import`/`export`) over a non-standard module system. You can always transpile to your preferred module system.
+  - [10.1](#modules--use-them) Prefer to use modules (`import`/`export`) over a non-standard module system when possible. You can always transpile to your preferred module system.
+
+    > This was modified from the original code style guide
 
     > Why? Modules are the future, let’s start using the future now.
 
     ```javascript
-    // bad
+    // acceptable
     const AirbnbStyleGuide = require('./AirbnbStyleGuide');
     module.exports = AirbnbStyleGuide.es6;
 
@@ -1316,29 +1321,29 @@ Other Style Guides
     ```
 
   <a name="modules--no-wildcard"></a><a name="10.2"></a>
-  - [10.2](#modules--no-wildcard) Do not use wildcard imports.
+  - [10.2](#modules--no-wildcard) wildcard imports are allowed.
 
-    > Why? This makes sure you have a single default export.
+    > This was modified from the original code style guide
 
     ```javascript
-    // bad
+    // acceptable
     import * as AirbnbStyleGuide from './AirbnbStyleGuide';
 
-    // good
+    // acceptable
     import AirbnbStyleGuide from './AirbnbStyleGuide';
     ```
 
   <a name="modules--no-export-from-import"></a><a name="10.3"></a>
-  - [10.3](#modules--no-export-from-import) And do not export directly from an import.
+  - [10.3](#modules--no-export-from-import) Exports directly from an import are allowed.
 
-    > Why? Although the one-liner is concise, having one clear way to import and one clear way to export makes things consistent.
+    > This was modified from the original code style guide
 
     ```javascript
-    // bad
+    // acceptable
     // filename es6.js
     export { es6 as default } from './AirbnbStyleGuide';
 
-    // good
+    // acceptable
     // filename es6.js
     import { es6 } from './AirbnbStyleGuide';
     export default es6;
@@ -1413,16 +1418,18 @@ Other Style Guides
     ```
 
   <a name="modules--multiline-imports-over-newlines"></a>
-  - [10.8](#modules--multiline-imports-over-newlines) Multiline imports should be indented just like multiline array and object literals.
+  - [10.8](#modules--multiline-imports-over-newlines) Multiline imports should be indented just like multiline array and object literals. However there is no restriction on imports always being multiline, unless it breaks the max character length rule.
  eslint: [`object-curly-newline`](https://eslint.org/docs/rules/object-curly-newline)
+
+    > This was modified from the original code style guide
 
     > Why? The curly braces follow the same indentation rules as every other curly brace block in the style guide, as do the trailing commas.
 
     ```javascript
-    // bad
+    // acceptable
     import {longNameA, longNameB, longNameC, longNameD, longNameE} from 'path';
 
-    // good
+    // acceptable
     import {
       longNameA,
       longNameB,
@@ -1433,12 +1440,14 @@ Other Style Guides
     ```
 
   <a name="modules--no-webpack-loader-syntax"></a>
-  - [10.9](#modules--no-webpack-loader-syntax) Disallow Webpack loader syntax in module import statements.
+  - [10.9](#modules--no-webpack-loader-syntax) Webpack loader syntax in module import statements is allowed but should be avoided unless necessary.
  eslint: [`import/no-webpack-loader-syntax`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-webpack-loader-syntax.md)
-    > Why? Since using Webpack syntax in the imports couples the code to a module bundler. Prefer using the loader syntax in `webpack.config.js`.
+    > This was modified from the original code style guide  
+
+    >Why? Since using Webpack syntax in the imports couples the code to a module bundler. Prefer using the loader syntax in webpack.config.js.
 
     ```javascript
-    // bad
+    // acceptable
     import fooSass from 'css!sass!foo.scss';
     import barCss from 'style!css!bar.css';
 
@@ -1469,23 +1478,23 @@ Other Style Guides
 ## Iterators and Generators
 
   <a name="iterators--nope"></a><a name="11.1"></a>
-  - [11.1](#iterators--nope) Don’t use iterators. Prefer JavaScript’s higher-order functions instead of loops like `for-in` or `for-of`. eslint: [`no-iterator`](https://eslint.org/docs/rules/no-iterator.html) [`no-restricted-syntax`](https://eslint.org/docs/rules/no-restricted-syntax)
+  - [11.1](#iterators--nope) Usage of iterators are acceptable. Prefer JavaScript’s higher-order functions such as find/filter/map/some when possible. eslint: [`no-iterator`](https://eslint.org/docs/rules/no-iterator.html) [`no-restricted-syntax`](https://eslint.org/docs/rules/no-restricted-syntax)
 
-    > Why? This enforces our immutable rule. Dealing with pure functions that return values is easier to reason about than side effects.
+    > This was modified from the original code style guide
 
     > Use `map()` / `every()` / `filter()` / `find()` / `findIndex()` / `reduce()` / `some()` / ... to iterate over arrays, and `Object.keys()` / `Object.values()` / `Object.entries()` to produce arrays so you can iterate over objects.
 
     ```javascript
     const numbers = [1, 2, 3, 4, 5];
 
-    // bad
+    // acceptable
     let sum = 0;
     for (let num of numbers) {
       sum += num;
     }
     sum === 15;
 
-    // good
+    // acceptable
     let sum = 0;
     numbers.forEach((num) => {
       sum += num;
@@ -1496,13 +1505,13 @@ Other Style Guides
     const sum = numbers.reduce((total, num) => total + num, 0);
     sum === 15;
 
-    // bad
+    // acceptable
     const increasedByOne = [];
     for (let i = 0; i < numbers.length; i++) {
       increasedByOne.push(numbers[i] + 1);
     }
 
-    // good
+    // acceptable
     const increasedByOne = [];
     numbers.forEach((num) => {
       increasedByOne.push(num + 1);
@@ -1615,13 +1624,15 @@ Other Style Guides
     ```
 
   <a name="es2016-properties--exponentiation-operator"></a>
-  - [12.3](#es2016-properties--exponentiation-operator) Use exponentiation operator `**` when calculating exponentiations. eslint: [`no-restricted-properties`](https://eslint.org/docs/rules/no-restricted-properties).
+  - [12.3](#es2016-properties--exponentiation-operator) Use exponentiation operator `**` or `Math.pow` when calculating exponentiations. eslint: [`no-restricted-properties`](https://eslint.org/docs/rules/no-restricted-properties).
+
+      > This was modified from the original code style guide
 
     ```javascript
-    // bad
+    // acceptable
     const binary = Math.pow(2, 10);
 
-    // good
+    // acceptable
     const binary = 2 ** 10;
     ```
 
@@ -1762,13 +1773,12 @@ Other Style Guides
     ```
 
   <a name="variables--unary-increment-decrement"></a><a name="13.6"></a>
-  - [13.6](#variables--unary-increment-decrement) Avoid using unary increments and decrements (`++`, `--`). eslint [`no-plusplus`](https://eslint.org/docs/rules/no-plusplus)
+  - [13.6](#variables--unary-increment-decrement) Using unary increments and decrements (`++`, `--`) is acceptable. eslint [`no-plusplus`](https://eslint.org/docs/rules/no-plusplus)
 
-    > Why? Per the eslint documentation, unary increment and decrement statements are subject to automatic semicolon insertion and can cause silent errors with incrementing or decrementing values within an application. It is also more expressive to mutate your values with statements like `num += 1` instead of `num++` or `num ++`. Disallowing unary increment and decrement statements also prevents you from pre-incrementing/pre-decrementing values unintentionally which can also cause unexpected behavior in your programs.
+    > This was modified from the original code style guide
 
     ```javascript
-    // bad
-
+    // acceptable
     const array = [1, 2, 3];
     let num = 1;
     num++;
@@ -1784,8 +1794,7 @@ Other Style Guides
       }
     }
 
-    // good
-
+    // acceptable
     const array = [1, 2, 3];
     let num = 1;
     num += 1;
@@ -1962,7 +1971,9 @@ Other Style Guides
 ## Comparison Operators & Equality
 
   <a name="comparison--eqeqeq"></a><a name="15.1"></a>
-  - [15.1](#comparison--eqeqeq) Use `===` and `!==` over `==` and `!=`. eslint: [`eqeqeq`](https://eslint.org/docs/rules/eqeqeq.html)
+  - [15.1](#comparison--eqeqeq) Use `===` and `!==` over `==` and `!=` unless comparing null, two literals, or the result of typeof (per eslint's eqeqeq "smart" mode). eslint: [`eqeqeq`](https://eslint.org/docs/rules/eqeqeq.html)
+
+      > This was modified from the original code style guide
 
   <a name="comparison--if"></a><a name="15.2"></a>
   - [15.2](#comparison--if) Conditional statements such as the `if` statement evaluate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
@@ -2332,7 +2343,7 @@ Other Style Guides
 ## Comments
 
   <a name="comments--multiline"></a><a name="17.1"></a>
-  - [18.1](#comments--multiline) Use `/** ... */` for multiline comments.
+  - [18.1](#comments--multiline) Use `/** ... */` for multiline comments. 
 
     ```javascript
     // bad
@@ -2468,15 +2479,36 @@ Other Style Guides
     }
     ```
 
+  <a name="comments--jsdoc"></a><a name="17.6"></a>
+  - [18.7](#comments--jsdoc) Use properly defined JSDoc syntax on all class methods and exported util methods.
+
+    > This was modified from the original code style guide
+
+    ```javascript
+    class Calculator extends Abacus {
+
+        /**
+         * Doubles the specified value
+         * @param {Number} value - The value to double
+         * @returns {Number} The doubled value
+         */
+        double(value) {
+          return value * 2;
+        }
+    }
+    ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Whitespace
 
   <a name="whitespace--spaces"></a><a name="18.1"></a>
-  - [19.1](#whitespace--spaces) Use soft tabs (space character) set to 2 spaces. eslint: [`indent`](https://eslint.org/docs/rules/indent.html)
+  - [19.1](#whitespace--spaces) Use soft tabs (space character) set to 4 spaces. eslint: [`indent`](https://eslint.org/docs/rules/indent.html)
+
+    > This was modified from the original code style guide
 
     ```javascript
-    // bad
+    // good
     function foo() {
     ∙∙∙∙let name;
     }
@@ -2486,7 +2518,7 @@ Other Style Guides
     ∙let name;
     }
 
-    // good
+    // bad
     function baz() {
     ∙∙let name;
     }
@@ -2831,7 +2863,9 @@ Other Style Guides
     ```
 
   <a name="whitespace--max-len"></a><a name="18.12"></a>
-  - [19.13](#whitespace--max-len) Avoid having lines of code that are longer than 100 characters (including whitespace). Note: per [above](#strings--line-length), long strings are exempt from this rule, and should not be broken up. eslint: [`max-len`](https://eslint.org/docs/rules/max-len.html)
+  - [19.13](#whitespace--max-len) Avoid having lines of code that are longer than 150 characters (including whitespace). Note: per [above](#strings--line-length), long strings are exempt from this rule, and should not be broken up. eslint: [`max-len`](https://eslint.org/docs/rules/max-len.html)
+
+    > This was modified from the original code style guide
 
     > Why? This ensures readability and maintainability.
 
@@ -2933,13 +2967,19 @@ Other Style Guides
   - [19.19](#whitespace--no-trailing-spaces) Avoid trailing spaces at the end of lines. eslint: [`no-trailing-spaces`](https://eslint.org/docs/rules/no-trailing-spaces)
 
   <a name="whitespace--no-multiple-empty-lines"></a>
-  - [19.20](#whitespace--no-multiple-empty-lines) Avoid multiple empty lines, only allow one newline at the end of files, and avoid a newline at the beginning of files. eslint: [`no-multiple-empty-lines`](https://eslint.org/docs/rules/no-multiple-empty-lines)
+  - [19.20](#whitespace--no-multiple-empty-lines) Avoid more than 4 multiple empty lines, only allow one newline at the end of files, and avoid a newline at the beginning of files. eslint: [`no-multiple-empty-lines`](https://eslint.org/docs/rules/no-multiple-empty-lines)
+
+    > This was modified from the original code style guide
 
     <!-- markdownlint-disable MD012 -->
     ```javascript
-    // bad - multiple empty lines
+    // bad - 6 multiple empty lines
     var x = 1;
 
+
+
+
+ 
 
     var y = 2;
 
@@ -3295,17 +3335,19 @@ Other Style Guides
     ```
 
   <a name="naming--leading-underscore"></a><a name="22.4"></a>
-  - [23.4](#naming--leading-underscore) Do not use trailing or leading underscores. eslint: [`no-underscore-dangle`](https://eslint.org/docs/rules/no-underscore-dangle.html)
+  - [23.4](#naming--leading-underscore) Trailing or leading underscores are allowed. eslint: [`no-underscore-dangle`](https://eslint.org/docs/rules/no-underscore-dangle.html)
 
-    > Why? JavaScript does not have the concept of privacy in terms of properties or methods. Although a leading underscore is a common convention to mean “private”, in fact, these properties are fully public, and as such, are part of your public API contract. This convention might lead developers to wrongly think that a change won’t count as breaking, or that tests aren’t needed. tl;dr: if you want something to be “private”, it must not be observably present.
+    > This was modified from the original code style guide
+
+    > A leading underscore is a common convention to mean “private”, but understand that JavaScript does not handle these any differently than methods without underscores. This should only be used for code readability, not for specific functionality.
 
     ```javascript
-    // bad
+    // acceptable
     this.__firstName__ = 'Panda';
     this.firstName_ = 'Panda';
     this._firstName = 'Panda';
 
-    // good
+    // acceptable
     this.firstName = 'Panda';
 
     // good, in environments where WeakMaps are available
@@ -3721,252 +3763,6 @@ Other Style Guides
 
 **[⬆ back to top](#table-of-contents)**
 
-## Testing
-
-  <a name="testing--yup"></a><a name="28.1"></a>
-  - [30.1](#testing--yup) **Yup.**
-
-    ```javascript
-    function foo() {
-      return true;
-    }
-    ```
-
-  <a name="testing--for-real"></a><a name="28.2"></a>
-  - [30.2](#testing--for-real) **No, but seriously**:
-    - Whichever testing framework you use, you should be writing tests!
-    - Strive to write many small pure functions, and minimize where mutations occur.
-    - Be cautious about stubs and mocks - they can make your tests more brittle.
-    - We primarily use [`mocha`](https://www.npmjs.com/package/mocha) and [`jest`](https://www.npmjs.com/package/jest) at Airbnb. [`tape`](https://www.npmjs.com/package/tape) is also used occasionally for small, separate modules.
-    - 100% test coverage is a good goal to strive for, even if it’s not always practical to reach it.
-    - Whenever you fix a bug, _write a regression test_. A bug fixed without a regression test is almost certainly going to break again in the future.
-
-**[⬆ back to top](#table-of-contents)**
-
-## Performance
-
-  - [On Layout & Web Performance](https://www.kellegous.com/j/2013/01/26/layout-performance/)
-  - [String vs Array Concat](https://jsperf.com/string-vs-array-concat/2)
-  - [Try/Catch Cost In a Loop](https://jsperf.com/try-catch-in-loop-cost/12)
-  - [Bang Function](https://jsperf.com/bang-function)
-  - [jQuery Find vs Context, Selector](https://jsperf.com/jquery-find-vs-context-sel/164)
-  - [innerHTML vs textContent for script text](https://jsperf.com/innerhtml-vs-textcontent-for-script-text)
-  - [Long String Concatenation](https://jsperf.com/ya-string-concat/38)
-  - [Are JavaScript functions like `map()`, `reduce()`, and `filter()` optimized for traversing arrays?](https://www.quora.com/JavaScript-programming-language-Are-Javascript-functions-like-map-reduce-and-filter-already-optimized-for-traversing-array/answer/Quildreen-Motta)
-  - Loading...
-
-**[⬆ back to top](#table-of-contents)**
-
-## Resources
-
-**Learning ES6+**
-
-  - [Latest ECMA spec](https://tc39.github.io/ecma262/)
-  - [ExploringJS](https://exploringjs.com/)
-  - [ES6 Compatibility Table](https://kangax.github.io/compat-table/es6/)
-  - [Comprehensive Overview of ES6 Features](http://es6-features.org/)
-
-**Read This**
-
-  - [Standard ECMA-262](https://www.ecma-international.org/ecma-262/6.0/index.html)
-
-**Tools**
-
-  - Code Style Linters
-    - [ESlint](https://eslint.org/) - [Airbnb Style .eslintrc](https://github.com/airbnb/javascript/blob/master/linters/.eslintrc)
-    - [JSHint](https://jshint.com/) - [Airbnb Style .jshintrc](https://github.com/airbnb/javascript/blob/master/linters/.jshintrc)
-  - Neutrino Preset - [@neutrinojs/airbnb](https://neutrinojs.org/packages/airbnb/)
-
-**Other Style Guides**
-
-  - [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html)
-  - [Google JavaScript Style Guide (Old)](https://google.github.io/styleguide/javascriptguide.xml)
-  - [jQuery Core Style Guidelines](https://contribute.jquery.org/style-guide/js/)
-  - [Principles of Writing Consistent, Idiomatic JavaScript](https://github.com/rwaldron/idiomatic.js)
-  - [StandardJS](https://standardjs.com)
-
-**Other Styles**
-
-  - [Naming this in nested functions](https://gist.github.com/cjohansen/4135065) - Christian Johansen
-  - [Conditional Callbacks](https://github.com/airbnb/javascript/issues/52) - Ross Allen
-  - [Popular JavaScript Coding Conventions on GitHub](http://sideeffect.kr/popularconvention/#javascript) - JeongHoon Byun
-  - [Multiple var statements in JavaScript, not superfluous](https://benalman.com/news/2012/05/multiple-var-statements-javascript/) - Ben Alman
-
-**Further Reading**
-
-  - [Understanding JavaScript Closures](https://javascriptweblog.wordpress.com/2010/10/25/understanding-javascript-closures/) - Angus Croll
-  - [Basic JavaScript for the impatient programmer](https://www.2ality.com/2013/06/basic-javascript.html) - Dr. Axel Rauschmayer
-  - [You Might Not Need jQuery](https://youmightnotneedjquery.com/) - Zack Bloom & Adam Schwartz
-  - [ES6 Features](https://github.com/lukehoban/es6features) - Luke Hoban
-  - [Frontend Guidelines](https://github.com/bendc/frontend-guidelines) - Benjamin De Cock
-
-**Books**
-
-  - [JavaScript: The Good Parts](https://www.amazon.com/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742) - Douglas Crockford
-  - [JavaScript Patterns](https://www.amazon.com/JavaScript-Patterns-Stoyan-Stefanov/dp/0596806752) - Stoyan Stefanov
-  - [Pro JavaScript Design Patterns](https://www.amazon.com/JavaScript-Design-Patterns-Recipes-Problem-Solution/dp/159059908X) - Ross Harmes and Dustin Diaz
-  - [High Performance Web Sites: Essential Knowledge for Front-End Engineers](https://www.amazon.com/High-Performance-Web-Sites-Essential/dp/0596529309) - Steve Souders
-  - [Maintainable JavaScript](https://www.amazon.com/Maintainable-JavaScript-Nicholas-C-Zakas/dp/1449327680) - Nicholas C. Zakas
-  - [JavaScript Web Applications](https://www.amazon.com/JavaScript-Web-Applications-Alex-MacCaw/dp/144930351X) - Alex MacCaw
-  - [Pro JavaScript Techniques](https://www.amazon.com/Pro-JavaScript-Techniques-John-Resig/dp/1590597273) - John Resig
-  - [Smashing Node.js: JavaScript Everywhere](https://www.amazon.com/Smashing-Node-js-JavaScript-Everywhere-Magazine/dp/1119962595) - Guillermo Rauch
-  - [Secrets of the JavaScript Ninja](https://www.amazon.com/Secrets-JavaScript-Ninja-John-Resig/dp/193398869X) - John Resig and Bear Bibeault
-  - [Human JavaScript](http://humanjavascript.com/) - Henrik Joreteg
-  - [Superhero.js](http://superherojs.com/) - Kim Joar Bekkelund, Mads Mobæk, & Olav Bjorkoy
-  - [JSBooks](https://jsbooks.revolunet.com/) - Julien Bouquillon
-  - [Third Party JavaScript](https://www.manning.com/books/third-party-javascript) - Ben Vinegar and Anton Kovalyov
-  - [Effective JavaScript: 68 Specific Ways to Harness the Power of JavaScript](https://amzn.com/0321812182) - David Herman
-  - [Eloquent JavaScript](https://eloquentjavascript.net/) - Marijn Haverbeke
-  - [You Don’t Know JS: ES6 & Beyond](https://shop.oreilly.com/product/0636920033769.do) - Kyle Simpson
-
-**Blogs**
-
-  - [JavaScript Weekly](https://javascriptweekly.com/)
-  - [JavaScript, JavaScript...](https://javascriptweblog.wordpress.com/)
-  - [Bocoup Weblog](https://bocoup.com/weblog)
-  - [Adequately Good](https://www.adequatelygood.com/)
-  - [NCZOnline](https://www.nczonline.net/)
-  - [Perfection Kills](http://perfectionkills.com/)
-  - [Ben Alman](https://benalman.com/)
-  - [Dmitry Baranovskiy](http://dmitry.baranovskiy.com/)
-  - [nettuts](https://code.tutsplus.com/?s=javascript)
-
-**Podcasts**
-
-  - [JavaScript Air](https://javascriptair.com/)
-  - [JavaScript Jabber](https://devchat.tv/js-jabber/)
-
-**[⬆ back to top](#table-of-contents)**
-
-## In the Wild
-
-  This is a list of organizations that are using this style guide. Send us a pull request and we'll add you to the list.
-
-  - **123erfasst**: [123erfasst/javascript](https://github.com/123erfasst/javascript)
-  - **4Catalyzer**: [4Catalyzer/javascript](https://github.com/4Catalyzer/javascript)
-  - **Aan Zee**: [AanZee/javascript](https://github.com/AanZee/javascript)
-  - **Airbnb**: [airbnb/javascript](https://github.com/airbnb/javascript)
-  - **AloPeyk**: [AloPeyk](https://github.com/AloPeyk)
-  - **AltSchool**: [AltSchool/javascript](https://github.com/AltSchool/javascript)
-  - **Apartmint**: [apartmint/javascript](https://github.com/apartmint/javascript)
-  - **Ascribe**: [ascribe/javascript](https://github.com/ascribe/javascript)
-  - **Avant**: [avantcredit/javascript](https://github.com/avantcredit/javascript)
-  - **Axept**: [axept/javascript](https://github.com/axept/javascript)
-  - **Billabong**: [billabong/javascript](https://github.com/billabong/javascript)
-  - **Bisk**: [bisk](https://github.com/Bisk/)
-  - **Bonhomme**: [bonhommeparis/javascript](https://github.com/bonhommeparis/javascript)
-  - **Brainshark**: [brainshark/javascript](https://github.com/brainshark/javascript)
-  - **CaseNine**: [CaseNine/javascript](https://github.com/CaseNine/javascript)
-  - **Cerner**: [Cerner](https://github.com/cerner/)
-  - **Chartboost**: [ChartBoost/javascript-style-guide](https://github.com/ChartBoost/javascript-style-guide)
-  - **Coeur d'Alene Tribe**: [www.cdatribe-nsn.gov](https://www.cdatribe-nsn.gov)
-  - **ComparaOnline**: [comparaonline/javascript](https://github.com/comparaonline/javascript-style-guide)
-  - **Compass Learning**: [compasslearning/javascript-style-guide](https://github.com/compasslearning/javascript-style-guide)
-  - **DailyMotion**: [dailymotion/javascript](https://github.com/dailymotion/javascript)
-  - **DoSomething**: [DoSomething/eslint-config](https://github.com/DoSomething/eslint-config)
-  - **Digitpaint** [digitpaint/javascript](https://github.com/digitpaint/javascript)
-  - **Drupal**: [www.drupal.org](https://git.drupalcode.org/project/drupal/blob/8.6.x/core/.eslintrc.json)
-  - **Ecosia**: [ecosia/javascript](https://github.com/ecosia/javascript)
-  - **Evernote**: [evernote/javascript-style-guide](https://github.com/evernote/javascript-style-guide)
-  - **Evolution Gaming**: [evolution-gaming/javascript](https://github.com/evolution-gaming/javascript)
-  - **EvozonJs**: [evozonjs/javascript](https://github.com/evozonjs/javascript)
-  - **ExactTarget**: [ExactTarget/javascript](https://github.com/ExactTarget/javascript)
-  - **Flexberry**: [Flexberry/javascript-style-guide](https://github.com/Flexberry/javascript-style-guide)
-  - **Gawker Media**: [gawkermedia](https://github.com/gawkermedia/)
-  - **General Electric**: [GeneralElectric/javascript](https://github.com/GeneralElectric/javascript)
-  - **Generation Tux**: [GenerationTux/javascript](https://github.com/generationtux/styleguide)
-  - **GoodData**: [gooddata/gdc-js-style](https://github.com/gooddata/gdc-js-style)
-  - **GreenChef**: [greenchef/javascript](https://github.com/greenchef/javascript)
-  - **Grooveshark**: [grooveshark/javascript](https://github.com/grooveshark/javascript)
-  - **Grupo-Abraxas**: [Grupo-Abraxas/javascript](https://github.com/Grupo-Abraxas/javascript)
-  - **Happeo**: [happeo/javascript](https://github.com/happeo/javascript)
-  - **Honey**: [honeyscience/javascript](https://github.com/honeyscience/javascript)
-  - **How About We**: [howaboutwe/javascript](https://github.com/howaboutwe/javascript-style-guide)
-  - **HubSpot**: [HubSpot/javascript](https://github.com/HubSpot/javascript)
-  - **Hyper**: [hyperoslo/javascript-playbook](https://github.com/hyperoslo/javascript-playbook/blob/master/style.md)
-  - **InterCity Group**: [intercitygroup/javascript-style-guide](https://github.com/intercitygroup/javascript-style-guide)
-  - **Jam3**: [Jam3/Javascript-Code-Conventions](https://github.com/Jam3/Javascript-Code-Conventions)
-  - **JSSolutions**: [JSSolutions/javascript](https://github.com/JSSolutions/javascript)
-  - **Kaplan Komputing**: [kaplankomputing/javascript](https://github.com/kaplankomputing/javascript)
-  - **KickorStick**: [kickorstick](https://github.com/kickorstick/)
-  - **Kinetica Solutions**: [kinetica/javascript](https://github.com/kinetica/Javascript-style-guide)
-  - **LEINWAND**: [LEINWAND/javascript](https://github.com/LEINWAND/javascript)
-  - **Lonely Planet**: [lonelyplanet/javascript](https://github.com/lonelyplanet/javascript)
-  - **M2GEN**: [M2GEN/javascript](https://github.com/M2GEN/javascript)
-  - **Mighty Spring**: [mightyspring/javascript](https://github.com/mightyspring/javascript)
-  - **MinnPost**: [MinnPost/javascript](https://github.com/MinnPost/javascript)
-  - **MitocGroup**: [MitocGroup/javascript](https://github.com/MitocGroup/javascript)
-  - **Muber**: [muber](https://github.com/muber/)
-  - **National Geographic**: [natgeo](https://github.com/natgeo/)
-  - **NullDev**: [NullDevCo/JavaScript-Styleguide](https://github.com/NullDevCo/JavaScript-Styleguide)
-  - **Nulogy**: [nulogy/javascript](https://github.com/nulogy/javascript)
-  - **Orange Hill Development**: [orangehill/javascript](https://github.com/orangehill/javascript)
-  - **Orion Health**: [orionhealth/javascript](https://github.com/orionhealth/javascript)
-  - **OutBoxSoft**: [OutBoxSoft/javascript](https://github.com/OutBoxSoft/javascript)
-  - **Peerby**: [Peerby/javascript](https://github.com/Peerby/javascript)
-  - **Pier 1**: [Pier1/javascript](https://github.com/pier1/javascript)
-  - **Qotto**: [Qotto/javascript-style-guide](https://github.com/Qotto/javascript-style-guide)
-  - **React**: [facebook.github.io/react/contributing/how-to-contribute.html#style-guide](https://facebook.github.io/react/contributing/how-to-contribute.html#style-guide)
-  - **REI**: [reidev/js-style-guide](https://github.com/rei/code-style-guides/)
-  - **Ripple**: [ripple/javascript-style-guide](https://github.com/ripple/javascript-style-guide)
-  - **Sainsbury’s Supermarkets**: [jsainsburyplc](https://github.com/jsainsburyplc)
-  - **Shutterfly**: [shutterfly/javascript](https://github.com/shutterfly/javascript)
-  - **Sourcetoad**: [sourcetoad/javascript](https://github.com/sourcetoad/javascript)
-  - **Springload**: [springload](https://github.com/springload/)
-  - **StratoDem Analytics**: [stratodem/javascript](https://github.com/stratodem/javascript)
-  - **SteelKiwi Development**: [steelkiwi/javascript](https://github.com/steelkiwi/javascript)
-  - **StudentSphere**: [studentsphere/javascript](https://github.com/studentsphere/guide-javascript)
-  - **SwoopApp**: [swoopapp/javascript](https://github.com/swoopapp/javascript)
-  - **SysGarage**: [sysgarage/javascript-style-guide](https://github.com/sysgarage/javascript-style-guide)
-  - **Syzygy Warsaw**: [syzygypl/javascript](https://github.com/syzygypl/javascript)
-  - **Target**: [target/javascript](https://github.com/target/javascript)
-  - **Terra**: [terra](https://github.com/cerner?utf8=%E2%9C%93&q=terra&type=&language=)
-  - **TheLadders**: [TheLadders/javascript](https://github.com/TheLadders/javascript)
-  - **The Nerdery**: [thenerdery/javascript-standards](https://github.com/thenerdery/javascript-standards)
-  - **Tomify**: [tomprats](https://github.com/tomprats)
-  - **Traitify**: [traitify/eslint-config-traitify](https://github.com/traitify/eslint-config-traitify)
-  - **T4R Technology**: [T4R-Technology/javascript](https://github.com/T4R-Technology/javascript)
-  - **UrbanSim**: [urbansim](https://github.com/urbansim/)
-  - **VoxFeed**: [VoxFeed/javascript-style-guide](https://github.com/VoxFeed/javascript-style-guide)
-  - **WeBox Studio**: [weboxstudio/javascript](https://github.com/weboxstudio/javascript)
-  - **Weggo**: [Weggo/javascript](https://github.com/Weggo/javascript)
-  - **Zillow**: [zillow/javascript](https://github.com/zillow/javascript)
-  - **ZocDoc**: [ZocDoc/javascript](https://github.com/ZocDoc/javascript)
-
-**[⬆ back to top](#table-of-contents)**
-
-## Translation
-
-  This style guide is also available in other languages:
-
-  - ![br](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Brazil.png) **Brazilian Portuguese**: [armoucar/javascript-style-guide](https://github.com/armoucar/javascript-style-guide)
-  - ![bg](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Bulgaria.png) **Bulgarian**: [borislavvv/javascript](https://github.com/borislavvv/javascript)
-  - ![ca](https://raw.githubusercontent.com/fpmweb/javascript-style-guide/master/img/catala.png) **Catalan**: [fpmweb/javascript-style-guide](https://github.com/fpmweb/javascript-style-guide)
-  - ![cn](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/China.png) **Chinese (Simplified)**: [lin-123/javascript](https://github.com/lin-123/javascript)
-  - ![tw](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Taiwan.png) **Chinese (Traditional)**: [jigsawye/javascript](https://github.com/jigsawye/javascript)
-  - ![fr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/France.png) **French**: [nmussy/javascript-style-guide](https://github.com/nmussy/javascript-style-guide)
-  - ![de](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Germany.png) **German**: [timofurrer/javascript-style-guide](https://github.com/timofurrer/javascript-style-guide)
-  - ![it](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Italy.png) **Italian**: [sinkswim/javascript-style-guide](https://github.com/sinkswim/javascript-style-guide)
-  - ![jp](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Japan.png) **Japanese**: [mitsuruog/javascript-style-guide](https://github.com/mitsuruog/javascript-style-guide)
-  - ![kr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/South-Korea.png) **Korean**: [ParkSB/javascript-style-guide](https://github.com/ParkSB/javascript-style-guide)
-  - ![ru](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Russia.png) **Russian**: [leonidlebedev/javascript-airbnb](https://github.com/leonidlebedev/javascript-airbnb)
-  - ![es](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Spain.png) **Spanish**: [paolocarrasco/javascript-style-guide](https://github.com/paolocarrasco/javascript-style-guide)
-  - ![th](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Thailand.png) **Thai**: [lvarayut/javascript-style-guide](https://github.com/lvarayut/javascript-style-guide)
-  - ![tr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Turkey.png) **Turkish**: [eraycetinay/javascript](https://github.com/eraycetinay/javascript)
-  - ![ua](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Ukraine.png) **Ukrainian**: [ivanzusko/javascript](https://github.com/ivanzusko/javascript)
-  - ![vn](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Vietnam.png) **Vietnam**: [dangkyokhoang/javascript-style-guide](https://github.com/dangkyokhoang/javascript-style-guide)
-
-## The JavaScript Style Guide Guide
-
-  - [Reference](https://github.com/airbnb/javascript/wiki/The-JavaScript-Style-Guide-Guide)
-
-## Chat With Us About JavaScript
-
-  - Find us on [gitter](https://gitter.im/airbnb/javascript).
-
-## Contributors
-
-  - [View Contributors](https://github.com/airbnb/javascript/graphs/contributors)
 
 ## License
 
@@ -3996,7 +3792,20 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **[⬆ back to top](#table-of-contents)**
 
 ## Amendments
+* 3.7 - Changed to ignore
+* 10.1 - Changed to ignore
+* 10.2 - Changed to ignore
+* 10.3 - Changed to ignore
+* 10.8 - Changed to ignore, will rely on maxLen instead
+* 10.9 - Changed to ignore
+* 11.1 - Changed to ignore
+* 12.3 - Changed to ignore
+* 13.6 - Changed to ignore
+* 15.1 - Updated to allow for undefined/null comparisons
+* 18.7 - Added new rule to specify that all class methods and exported util functions should have jsdocs
+* 19.1 - Updated to 4-space soft tabs
+* 19.13 - Updated to allow 150 instead of 100
+* 19.20 - Changed to allow UP TO 4 blank lines in a row
+* 23.4 - Changed to ignore
 
 We encourage you to fork this guide and change the rules to fit your team’s style guide. Below, you may list some amendments to the style guide. This allows you to periodically update your style guide without having to deal with merge conflicts.
-
-# };
