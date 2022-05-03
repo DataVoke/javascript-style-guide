@@ -1,6 +1,6 @@
 {
   "name": "@caitech/eslint-config-caitech",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A mostly reasonable approach to JavaScript amended for the CAI tech team.",
   "main": "eslint.js",
   "scripts": {},
