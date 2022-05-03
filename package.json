@@ -1,12 +1,12 @@
 {
-  "name": "eslint-config-caitech",
-  "version": "1.0.0",
+  "name": "@caitech/eslint-config-caitech",
+  "version": "1.0.1",
   "description": "A mostly reasonable approach to JavaScript amended for the CAI tech team.",
   "main": "eslint.js",
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/DataVoke/javascript-style-guide.git"
+    "url": "git+https://github.com/DataVoke/javascript-style-guide.git"
   },
   "keywords": [
     "style guide",
