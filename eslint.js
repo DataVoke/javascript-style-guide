@@ -7,6 +7,8 @@ module.exports = {
         "no-underscore-dangle": "off",
         "consistent-return": "off",
         "default-case": "off",
+        "func-style": "off",
+        "no-implicit-coercion": "error",
         "indent": [
             "error",
             4,
