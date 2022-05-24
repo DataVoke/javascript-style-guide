@@ -10,6 +10,7 @@ module.exports = {
         "func-style": "off",
         "no-use-before-define": ["error", { "functions": false, "classes": true, "variables": true }],
         "global-require": "off",
+        "no-console": "off",
         "no-implicit-coercion": "error",
         "indent": [
             "error",
