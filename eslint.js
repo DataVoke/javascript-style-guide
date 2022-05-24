@@ -8,6 +8,8 @@ module.exports = {
         "consistent-return": "off",
         "default-case": "off",
         "func-style": "off",
+        "no-use-before-define": ["error", { "functions": false, "classes": true, "variables": true }],
+        "global-require": "off",
         "no-implicit-coercion": "error",
         "indent": [
             "error",
