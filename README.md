@@ -101,6 +101,32 @@ Other Style Guides
     console.log(foo[0], bar[0]); // => 9, 9
     ```
 
+  <a name="types--implicit-coercion"></a><a name="1.3"></a>
+  - [1.3](#types--implicit-coercion) Use explicit type constructors over implicit coercion. eslint: [`no-implicit-coercion`](https://eslint.org/docs/rules/no-implicit-coercion)
+
+    > This was modified from the original code style guide
+
+    > Why? Explicit type constructors are much more intuitive to read.
+
+    ```javascript
+    // bad
+    var b = !!foo;
+    var b = ~foo.indexOf(".");
+    var n = +foo;
+    var n = 1 * foo;
+    var s = "" + foo;
+    foo += ``;
+
+    // good
+    var b = Boolean(foo);
+    var b = foo.indexOf(".") !== -1;
+    var n = Number(foo);
+    var n = Number(foo);
+    var s = String(foo);
+    foo = String(foo);
+    ```
+    
+
 **[⬆ back to top](#table-of-contents)**
 
 ## References
@@ -654,17 +680,19 @@ Other Style Guides
 ## Functions
 
   <a name="functions--declarations"></a><a name="7.1"></a>
-  - [7.1](#functions--declarations) Use named function expressions instead of function declarations. eslint: [`func-style`](https://eslint.org/docs/rules/func-style)
+  - [7.1](#functions--declarations) Prefer named function expressions instead of function declarations. eslint: [`func-style`](https://eslint.org/docs/rules/func-style)
+
+      > This was modified from the original code style guide
 
     > Why? Function declarations are hoisted, which means that it’s easy - too easy - to reference the function before it is defined in the file. This harms readability and maintainability. If you find that a function’s definition is large or complex enough that it is interfering with understanding the rest of the file, then perhaps it’s time to extract it to its own module! Don’t forget to explicitly name the expression, regardless of whether or not the name is inferred from the containing variable (which is often the case in modern browsers or when using compilers such as Babel). This eliminates any assumptions made about the Error’s call stack. ([Discussion](https://github.com/airbnb/javascript/issues/794))
 
     ```javascript
-    // bad
+    // acceptable
     function foo() {
       // ...
     }
 
-    // bad
+    // acceptable
     const foo = function () {
       // ...
     };
@@ -3792,7 +3820,9 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **[⬆ back to top](#table-of-contents)**
 
 ## Amendments
+* 1.3 - Added new rule
 * 3.7 - Changed to ignore
+* 7.1 - Changed to ignore
 * 10.1 - Changed to ignore
 * 10.2 - Changed to ignore
 * 10.3 - Changed to ignore

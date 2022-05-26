@@ -7,6 +7,11 @@ module.exports = {
         "no-underscore-dangle": "off",
         "consistent-return": "off",
         "default-case": "off",
+        "func-style": "off",
+        "no-use-before-define": ["error", { "functions": false, "classes": true, "variables": true }],
+        "global-require": "off",
+        "no-console": "off",
+        "no-implicit-coercion": "error",
         "indent": [
             "error",
             4,
